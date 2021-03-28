@@ -1,0 +1,23 @@
+{% extends 'workshop/base.html' %}
+
+{% block title %}
+Отзывы
+{% endblock %}
+
+{% block content %}
+    <h1>Отзывы</h1>
+    <div class="alert alert-warning" >
+        <h3>Отзывы</h3>
+    </div>
+    {% for el in reviews_info %}
+        <div class="alert alert-success mt-2">
+            <h3>Автор отзыва:</h3>
+            <p>{{ el.author }}</p>
+            <h3>Тема:</h3>
+            <p>{{ el.theme }}</p>
+            <h3>Мастерская:</h3>
+            <p>{{ el.workshop }}</p>
+            <a href="detail/{{ el.id }}">Перейти к отзыву</a>
+        </div>
+    {% endfor %}
+{% endblock %}

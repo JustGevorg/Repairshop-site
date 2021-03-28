@@ -1,0 +1,28 @@
+{% extends 'workshop/base.html' %}
+
+{% block title %}
+Создать отзыв
+{% endblock %}
+
+{% block content %}
+    <h1>Создание отзыва</h1>
+    <div class="alert alert-warning" >
+        <h3>Создание отзыва</h3>
+    </div>
+    <p><b>Выберите мастерскую</b></p>
+    {% if messages %}
+        <div class="alert-success">
+        {% for n in messages %}
+            {{ n }}
+        {% endfor %}
+        </div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.workshop }}<br>
+        <p></p>
+        {{ form.theme }}<br>
+        {{ form.text }}<br>
+        <button type="submit" class="btn btn-success">Отправить</button>
+    </form>
+{% endblock %}

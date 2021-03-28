@@ -1,0 +1,24 @@
+{% extends 'workshop/base.html' %}
+
+{% block title %}
+SQL-запрос
+{% endblock %}
+
+{% block content %}
+    <h1>SQL-запрос</h1>
+    <div class="alert alert-warning" >
+        <h3>SQL-запрос</h3>
+        <p></p>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.req }}<br>
+        <button type="submit" class="btn btn-success">Выполнить</button>
+    </form>
+        <div>
+            <p>{{ req_info}}</p>
+            {% for i in res %}
+                <p>{{ i }}</p>
+            {% endfor %}
+        </div>
+{% endblock %}
