@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">MagicMechanics</font></font></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Переключить навигацию">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Главная</font></font></a>
+         </li>
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'workshops' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Мастерские</font></font></a>
+         </li>
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'masters' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Специалисты</font></font></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'guards' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Охранные фирмы</font></font></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'review' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Посмотреть отзывы</font></font></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="{% url 'make_review' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Написать отзыв</font></font></a>
+        </li>
+        {% if request.user.is_authenticated %}
+            <li class="nav-item active">
+              <a class="nav-link rounded btn-danger" aria-current="page" href="{% url 'logout_page' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Выйти</font></font></a>
+            </li>
+        {% else %}
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" style="color: red" href="{% url 'login_page' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Авторизация</font></font></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link rounded btn-success" aria-current="page" href="{% url 'register_page' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Регистрация</font></font></a>
+        </li>
+        {% endif %}
+
+        <li class="nav-item active">
+            <p style="margin-left: 100px"><a style="color: white">Вы вошли как:        {{ request.user }}</a></p>
+        </li>
+        {% if request.user.is_superuser %}
+            <li class="nav-item active">
+                <a class="nav-link rounded" aria-current="page" href="admin/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Панель администратора</font></font></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link rounded" aria-current="page" href="{% url 'admin_req' %}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SQL-запрос</font></font></a>
+            </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

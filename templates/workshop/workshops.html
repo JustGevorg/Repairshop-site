@@ -1,0 +1,35 @@
+{% extends 'workshop/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>Наши мастерские</h1>
+    <div class="alert alert-warning mt-5%">
+        <h3>Наши мастерские</h3>
+    </div>
+    {% for el in workshop_info %}
+        <div class="alert alert-success mt-2">
+            <h3>{{ el.title }}</h3>
+            <p><b>Описание:</b></p>
+            <p>{{ el.description }}</p>
+            <p><b>Режим работы:</b></p>
+            <p>{{ el.time_table }}</p>
+            <p><b>Адрес:</b></p>
+            <p>{{ el.addres }}</p>
+            <p><b>Мастера, работающие в этой мастерской:</b></p>
+            {% for elem in works_on_info %}
+                {% if elem.workshop == el %}
+                    <p>{{ elem.master.name }}</p>
+                {% endif %}
+            {% endfor %}
+            <p><b>Кто охраняет это мастерскую:</b></p>
+            {% for element in defend_info %}
+                {% if element.workshop == el %}
+                    <p>{{ element.guard.title }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

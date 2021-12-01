@@ -1,0 +1,25 @@
+{% extends 'workshop/base.html' %}
+
+{% block title %}
+Охранные фирмы
+{% endblock %}
+
+{% block content %}
+    <h1>Охранные фирмы</h1>
+    <div class="alert alert-warning mt-5%">
+        <h3>Охранные фирмы</h3>
+    </div>
+    {% for el in guard_info %}
+        <div class="alert alert-success mt-2">
+            <h3>{{ el.title }}</h3>
+            <p><b>Репутация:</b></p>
+            <p>{{ el.status }}</p>
+            <p><b>Мастерские, которые охраняет фирма:</b></p>
+            {% for element in defend_info %}
+                {% if element.guard == el %}
+                    <p>{{ element.workshop.title }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

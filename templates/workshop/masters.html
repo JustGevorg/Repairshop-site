@@ -1,0 +1,28 @@
+{% extends 'workshop/base.html' %}
+
+{% block title %}
+Специалисты
+{% endblock %}
+
+{% block content %}
+    <h1>Наши специалисты</h1>
+    <div class="alert alert-warning mt-5%">
+        <h3>Наши мастера</h3>
+    </div>
+    {% for el in masters_info %}
+        <div class="alert alert-success mt-2">
+            <p><b>Имя:</b></p>
+            <p>{{ el.name }}</p>
+            <p><b>Общий стаж(лет):</b></p>
+            <p>{{ el.experience }}</p>
+            <p><b>Специализация:</b></p>
+            <p>{{ el.spec }}</p>
+            <p><b>Мастерская, в которой работает мастер:</b></p>
+            {% for elem in works_on_info %}
+                {% if elem.master == el %}
+                    <p>{{ elem.workshop.title }}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}
